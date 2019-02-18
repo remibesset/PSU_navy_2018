@@ -11,6 +11,9 @@ SRC = src/main.c \
 	src/parse_map.c \
 	src/create_map.c \
 	src/display_map.c \
+	src/base_handling.c \
+	src/CPool.c \
+	src/info_handling.c \
 
 CFLAGS = -g -Iinclude
 
