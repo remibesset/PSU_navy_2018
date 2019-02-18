@@ -7,7 +7,8 @@
 
 #include "navy.h"
 
-void helper(void) {
+void helper(void)
+{
     my_putstr("USAGE\n\t./navy [first_player_pid] navy_positions\nDESCRIPTION\n\
 \tfirst_player_pid: only for the 2nd player. pid of the first player.\n\
 \tnavy_positions: file representing the positions of the ships.\n");

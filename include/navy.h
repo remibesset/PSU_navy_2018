@@ -36,5 +36,11 @@ char *get_next_line(int fd);
 void header_display_map(int my_pos);
 void display_map(player_t player, int disp_en_map);
 char **create_map(char *filepath, int host);
+char *format(char *binary);
+char *dec_to_bin(int nbr);
+int bin_to_dec(char *str);
+char *crypt(char *str);
+char decrypt_letter(char *letter);
+char *decrypt(char *str);
 
 #endif
