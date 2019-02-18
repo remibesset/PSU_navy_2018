@@ -5,9 +5,9 @@
 ** crypt and decrypt positions
 */
 
-#include "../include/navy"
+#include "navy.h"
 
-char *crypt(char *str)
+char *crypt_f(char *str)
 {
     char *crypted;
 

@@ -5,9 +5,11 @@
 ** structure
 */
 
-#ifndef STRUCT_H
-#define STRUCT_H
+#ifndef MYSTRUCT_H
+#define MYSTRUCT_H
 
+#define NBR_LINE 8
+#define NBR_COL 8
 #define GAME game_t
 
 typedef struct player_s
@@ -16,12 +18,11 @@ typedef struct player_s
     char enemy_map[8][9];
 }player_t;
 
-typedef struct game_s
+struct game_s
 {
     player_t enemy;
     player_t owner;
     char *filepath;
 }game_t;
-
 
 #endif
