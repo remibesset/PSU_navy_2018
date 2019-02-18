@@ -7,11 +7,6 @@
 
 #include "navy.h"
 
-void my_putchar(char c)
-{
-    write(1, &c, 1);
-}
-
 int my_strlen(char *str)
 {
     int i = 0;
@@ -44,4 +39,24 @@ int my_atoi(char *str)
         i++;
     }
     return (result);
+}
+
+char *my_realloc(char *src)
+{
+    char *str = NULL;
+    int i = 0;
+
+    for (i = 0; src[i] != '\0'; i++);
+    str = malloc(sizeof(char) * (i + 2));
+    i = 0;
+    if (str == NULL)
+        return (NULL);
+    while (src[i] != '\0') {
+        str[i] = src[i];
+        i++;
+    }
+    str[i] = '\0';
+    str[i + 1] = '\0';
+    free(src);
+    return (str);
 }
