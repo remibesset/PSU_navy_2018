@@ -36,5 +36,10 @@ typedef struct minishell_s
 
 
 void *xmalloc(int size);
+char *my_strcat(char *dest, char *src);
+int my_getnbr(char *str);
+char *int_to_str(int nbr);
+char *my_revstr(char *str);
+int my_strlen(char *str);
 
 #endif
