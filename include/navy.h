@@ -5,8 +5,11 @@
 ** .h
 */
 
-#ifndef MY_H
-#define MY_H
+#ifndef NAVY_H
+#define NAVY_H
+
+#define NBR_LINE 8
+#define NBR_COL 9
 
 #include <unistd.h>
 #include <stdio.h>
@@ -14,27 +17,20 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include "get_next_line.h"
+#include "struct.h"
 
-// typedef struct linked_list_a
-// {
-//     char *data;
-//     linked_list_t next;
-// }linked_list_t;
-
-
-typedef struct minishell_s
-{
-    char *previous_pwd;
-    char *pwd;
-    char **env;
-    char **path;
-    int nb_arg_path;
-    int pass;
-    int run;
-    char *buffer;
-}minishell_t;
-
-
+int my_strlen(char *str);
+void my_putstr(char *str);
+int my_atoi(char *str);
 void *xmalloc(int size);
+char *my_realloc(char *src);
+char *put_in_save(char *save, char *buffer, int j);
+int verification_save(char **save, char **str, int *i);
+int complete_str(char **str, char *buffer, int *i, char **save);
+char *get_next_line(int fd);
+void header_display_map(int my_pos);
+void display_map(player_t player, int disp_en_map);
+char **create_map(char *filepath, int host);
 
 #endif

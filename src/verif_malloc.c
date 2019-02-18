@@ -5,7 +5,7 @@
 ** verif
 */
 
-#include "../include/minishell.h"
+#include "navy.h"
 
 void *xmalloc(int size)
 {
@@ -14,7 +14,7 @@ void *xmalloc(int size)
 
     if (ptr == NULL) {
         write(2, err_msg, my_strlen(err_msg));
-        exit(84);
+        return ("-1");
     }
     return (ptr);
 }

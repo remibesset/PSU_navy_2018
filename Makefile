@@ -8,12 +8,15 @@
 SRC = src/main.c \
 	src/verif_malloc.c \
 	src/utils.c \
+	src/parse_map.c \
+	src/create_map.c \
+	src/display_map.c \
 
 CFLAGS = -g -Iinclude
 
 OBJ = $(SRC:.c=.o)
 
-NAME = mysh
+NAME = navy
 
 GCCWAY = gcc -o
 
