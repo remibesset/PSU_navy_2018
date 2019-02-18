@@ -8,12 +8,13 @@
 SRC = src/main.c \
 	src/verif_malloc.c \
 	src/utils.c \
-	src/parse_map.c \
 	src/create_map.c \
 	src/display_map.c \
 	src/base_handling.c \
 	src/CPool.c \
 	src/info_handling.c \
+	src/get_next_line.c \
+	src/error.c \
 
 CFLAGS = -g -Iinclude
 

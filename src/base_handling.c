@@ -5,7 +5,7 @@
 ** change bases
 */
 
-#include "../include/navy"
+#include "navy.h"
 
 int bin_to_dec(char *str)
 {
