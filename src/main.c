@@ -22,6 +22,13 @@ int main(int ac, char **av)
         if (ac == 2) {
             GAME.filepath = av[1];
             create_map(GAME.filepath, 0);
+            create_map("pos2", 1);
+            while (1 == 1) {
+                my_putstr("\n\n\n#########################################################\n");
+                turn_display(0);
+                display_map(GAME.owner);
+                display_map(GAME.enemy);
+            }
         } else if (ac == 3) {
             GAME.filepath = av[2];
             create_map(GAME.filepath, 1);
