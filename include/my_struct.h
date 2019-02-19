@@ -31,6 +31,7 @@ struct game_s
     player_t enemy;
     player_t owner;
     char *filepath;
+    int win;
 }game_t;
 
 #endif
