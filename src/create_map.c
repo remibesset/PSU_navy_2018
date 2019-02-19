@@ -42,13 +42,15 @@ void change_map_parsing(char *line, char cara_same, int host)
 int line_to_parsing(char *line, int host, int i)
 {
     if (my_strlen(line) == 8 && line[0] >= '2' && line[0] <= '5' && i + '1'\
-        != line[0])
+        != line[0] || (line[1] != ':' || line[4] != ':'))
         return (ERROR_NUM);
     if (line[2] >= 'A' && line[2] <= 'H' && line[5] >= 'A' && line[5] <= 'H' &&
     line[3] >= '0' && line[3] <= '8' && line[6] >= '0' && line[6] <= '8') {
-        if (line[2] == line[5] && line[6] == (line[3] + line[0] - '1'))
+        if (line[2] == line[5] && line[6] == (line[3] + line[0] - '1') &&
+            line[3] < line[6])
             change_map_parsing(line, line[2], host);
-        else if (line[3] == line[6] && line[5] == (line[2] + line[0] - '1'))
+        else if (line[3] == line[6] && line[5] == (line[2] + line[0] - '1') &&
+            line[2] < line[5])
             change_map_parsing(line, line[3], host);
         else
             return (ERROR_NUM);
@@ -61,7 +63,7 @@ int line_to_parsing(char *line, int host, int i)
 
 int parse_file_map(char *filepath, int host)
 {
-   int fd = open(filepath, O_RDONLY);
+    int fd = open(filepath, O_RDONLY);
     char *s = NULL;
     int i = 0;
 

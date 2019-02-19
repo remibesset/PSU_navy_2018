@@ -16,6 +16,10 @@ void helper(void)
 
 int main(int ac, char **av)
 {
+    GAME.win = -1;
+
+    if (ac < 2 || ac > 3)
+        return (84);
     if (av[1][0] == '-' && av[1][1] == 'h' && my_strlen(av[1]) == 2)
         helper();
     else if (ac == 2 || ac == 3) {
@@ -23,12 +27,13 @@ int main(int ac, char **av)
             GAME.filepath = av[1];
             create_map(GAME.filepath, 0);
             create_map("pos2", 1);
-            while (1 == 1) {
-                my_putstr("\n\n\n#########################################################\n");
+            while (GAME.win == -1) {
                 turn_display(0);
                 display_map(GAME.owner);
                 display_map(GAME.enemy);
+                verification_fictory();
             }
+            return (GAME.win);
         } else if (ac == 3) {
             GAME.filepath = av[2];
             create_map(GAME.filepath, 1);
