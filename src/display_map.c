@@ -7,20 +7,22 @@
 
 #include "navy.h"
 
-int
-
 int turn_display(int my_turn)
 {
     char *s = NULL;
 
-    my_putstr("Your turn: ");
+    my_putstr("attack: ");
     s = get_next_line(0);
-    if (s[0] == '\0')
+    if (s == NULL)
         return (1);
+    if (my_strlen(s) < 2 || my_strlen(s) > 2) {
+        my_putstr("wrong position\n");
+        turn_display(my_turn);
+    }
     if (my_turn == 0)
-        hit_the_enemey_map(GAME.owner, s);
+        hit_the_enemey_map(&GAME.enemy, &GAME.owner, s, my_turn);
     else if (my_turn == 1)
-        hit_the_enemey_map(GAME.enemy, s);
+        hit_the_enemey_map(&GAME.owner, &GAME.enemy, s, my_turn);
     else
         return (ERROR_NUM);
 }

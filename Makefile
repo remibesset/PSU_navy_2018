@@ -15,6 +15,7 @@ SRC = src/main.c \
 	src/info_handling.c \
 	src/get_next_line.c \
 	src/error.c \
+	src/hit_function.c \
 
 CFLAGS = -g -Iinclude
 

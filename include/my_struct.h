@@ -13,6 +13,13 @@
 #define GAME game_t
 #define ERROR_NUM 84
 
+typedef struct hit_s
+{
+    int x;
+    int y;
+    int hit;
+}hit_t;
+
 typedef struct player_s
 {
     char my_map[8][9];

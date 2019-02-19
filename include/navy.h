@@ -38,6 +38,8 @@ char *get_next_line(int fd);
 void header_display_map(int my_pos);
 void display_map(player_t player);
 int turn_display(int my_turn);
+int position_it_on_map(player_t *other_player, player_t *player, hit_t pos);
+int hit_the_enemey_map(player_t *, player_t *, char *, int );
 int create_map(char *filepath, int host);
 char *format(char *binary);
 char *dec_to_bin(int nbr);
