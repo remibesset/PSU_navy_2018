@@ -11,6 +11,7 @@
 #define NBR_LINE 8
 #define NBR_COL 8
 #define GAME game_t
+#define ERROR_NUM 84
 
 typedef struct player_s
 {

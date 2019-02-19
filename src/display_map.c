@@ -7,6 +7,24 @@
 
 #include "navy.h"
 
+int
+
+int turn_display(int my_turn)
+{
+    char *s = NULL;
+
+    my_putstr("Your turn: ");
+    s = get_next_line(0);
+    if (s[0] == '\0')
+        return (1);
+    if (my_turn == 0)
+        hit_the_enemey_map(GAME.owner, s);
+    else if (my_turn == 1)
+        hit_the_enemey_map(GAME.enemy, s);
+    else
+        return (ERROR_NUM);
+}
+
 void header_display_map(int my_pos)
 {
     my_putstr((my_pos == 0) ? "my positions:\n" : "\n\nenemy’s positions:\n");
