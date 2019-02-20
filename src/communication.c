@@ -7,6 +7,9 @@
 
 #include "navy.h"
 
+int enemy_pid = 0;
+char shot[9] = {0};
+
 void detect(int index_sig, siginfo_t *info, void *context)
 {
     if (index_sig == SIGUSR1) {
