@@ -40,20 +40,11 @@ void syncro(int player)
         my_putnbr(getpid());
         if (nanosleep(&sleep_time, NULL) != 0) {
             printf("enemy connected\n");
-	} else {
+	    } else {
             write(2, "Timeout\n", 9);
         }
-    }
-    if (player == 1)
-        kill(enemy_pid, Svoid emit(char *str)
-{
-    for (int i = 0; str[i] != '\0'; i++) {
-        if (str[i] == '0')
-            kill(enemy_pid, SIGUSR1);
-        else if (str[i] == '1')
-            kill(enemy_pid, SIGUSR2);
-        usleep(100);
-    }
+    } if (player == 1)
+        kill(enemy_pid, SIGUSR1);
 }
 
 void init_sig(struct sigaction *info)
