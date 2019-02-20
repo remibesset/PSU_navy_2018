@@ -8,6 +8,7 @@
 SRC = src/main.c \
 	src/verif_malloc.c \
 	src/utils.c \
+	src/utils2.c \
 	src/create_map.c \
 	src/display_map.c \
 	src/base_handling.c \
