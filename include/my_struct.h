@@ -24,6 +24,7 @@ typedef struct player_s
 {
     char my_map[8][9];
     char enemy_map[8][9];
+    pid_t pid;
 }player_t;
 
 struct game_s

@@ -31,7 +31,7 @@ int main(int ac, char **av)
                 turn_display(0);
                 display_map(GAME.owner);
                 display_map(GAME.enemy);
-                verification_fictory();
+                verification_victory();
             }
             return (GAME.win);
         } else if (ac == 3) {
