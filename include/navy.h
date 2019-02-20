@@ -15,6 +15,7 @@
 #include <sys/wait.h>
 #include <signal.h>
 #include <fcntl.h>
+#include <time.h>
 #include "get_next_line.h"
 #include "my_struct.h"
 
