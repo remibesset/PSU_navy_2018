@@ -11,6 +11,8 @@ char *crypt_f(char *str)
 {
     char *crypted;
 
+    if (my_strlen(str) == 9)
+        str += 1;
     if (str[0] < 65 || str[0] > 72)
         return (NULL);
     else if (str[1] < 48 || str[1] >= 56 || my_strlen(str) != 2)
