@@ -31,6 +31,7 @@ int my_getnbr(char *str);
 char *int_to_str(int nbr);
 char *my_revstr(char *str);
 char *my_realloc(char *src);
+int my_put_nbr(int nb);
 char *put_in_save(char *save, char *buffer, int j);
 int verification_save(char **save, char **str, int *i);
 int complete_str(char **str, char *buffer, int *i, char **save);
