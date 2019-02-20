@@ -17,6 +17,7 @@
 #include <fcntl.h>
 #include "get_next_line.h"
 #include "my_struct.h"
+#include <time.h>
 
 int my_strlen(char *str);
 void my_putstr(char *str);
