@@ -7,15 +7,7 @@
 
 #include "navy.h"
 
-void change_map(int host, int i, int j, char *line)
-{
-    if (host == 0)
-        GAME.owner.my_map[i][j] = line[0];
-    else if (host == 1)
-        GAME.enemy.my_map[i][j] = line[0];
-}
-
-void change_map_parsing(char *line, char cara_same, int host)
+void change_map_parsing(char *line, char cara_same)
 {
     int i = 0;
     int j = 0;
@@ -29,17 +21,17 @@ void change_map_parsing(char *line, char cara_same, int host)
         j = carra1 - 65;
         max_j = carra2 - 65;
         for (j; j <= max_j; j++)
-            change_map(host, i, j, line);
+            GAME.owner.my_map[i][j] = line[0];
     } else if (cara_same >= 'A' && cara_same <= 'H') {
         j = cara_same - 65;
         i = carra1 - 49;
         max_i = carra2 - 49;
         for (i; i <= max_i; i++)
-            change_map(host, i, j, line);
+            GAME.owner.my_map[i][j] = line[0];
     }
 }
 
-int line_to_parsing(char *line, int host, int i)
+int line_to_parsing(char *line, int i)
 {
     if (my_strlen(line) == 8 && line[0] >= '2' && line[0] <= '5' && i + '1'\
         != line[0] || (line[1] != ':' || line[4] != ':'))
@@ -48,10 +40,10 @@ int line_to_parsing(char *line, int host, int i)
     line[3] >= '0' && line[3] <= '8' && line[6] >= '0' && line[6] <= '8') {
         if (line[2] == line[5] && line[6] == (line[3] + line[0] - '1') &&
             line[3] < line[6])
-            change_map_parsing(line, line[2], host);
+            change_map_parsing(line, line[2]);
         else if (line[3] == line[6] && line[5] == (line[2] + line[0] - '1') &&
             line[2] < line[5])
-            change_map_parsing(line, line[3], host);
+            change_map_parsing(line, line[3]);
         else
             return (ERROR_NUM);
     } else {
@@ -61,7 +53,7 @@ int line_to_parsing(char *line, int host, int i)
     return (0);
 }
 
-int parse_file_map(char *filepath, int host)
+int parse_file_map(char *filepath)
 {
     int fd = open(filepath, O_RDONLY);
     char *s = NULL;
@@ -73,7 +65,7 @@ int parse_file_map(char *filepath, int host)
         return (ERROR_NUM);
     while (s) {
         i++;
-        if (line_to_parsing(s, host, i) == 84)
+        if (line_to_parsing(s, i) == 84)
             return (ERROR_NUM);
         free(s);
         s = get_next_line(fd);
@@ -83,22 +75,14 @@ int parse_file_map(char *filepath, int host)
         return (ERROR_NUM);
 }
 
-int create_map(char *filepath, int host)
+int create_map(char *filepath)
 {
-    for (int i = 0; host == 0 && i < NBR_LINE; i++)
+    for (int i = 0; i < NBR_LINE; i++)
         for (int j = 0; j < NBR_COL; j++) {
             GAME.owner.my_map[i][j] = '.';
             GAME.owner.enemy_map[i][j] = '.';
         }
-    for (int i = 0; host == 1 && i < NBR_LINE; i++)
-        for (int j = 0; j < NBR_COL; j++) {
-            GAME.enemy.my_map[i][j] = '.';
-            GAME.enemy.enemy_map[i][j] = '.';
-        }
-    if (parse_file_map(filepath, host) == 84)
+    if (parse_file_map(filepath) == 84)
         return (ERROR_NUM);
-    if (host == 0)
-        display_map(GAME.owner);
-    else if (host == 1)
-        display_map(GAME.enemy);
+    display_map(GAME.owner);
 }

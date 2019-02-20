@@ -11,8 +11,6 @@ char *crypt_f(char *str)
 {
     char *crypted;
 
-    if (my_strlen(str) == 9)
-        str += 1;
     if (str[0] < 65 || str[0] > 72)
         return (NULL);
     else if (str[1] < 48 || str[1] >= 56 || my_strlen(str) != 2)
@@ -39,8 +37,11 @@ char *decrypt(char *str)
     char *letter = malloc(sizeof(char) * 5);
     int i = 0;
 
+    if (my_strlen(str) == 9)
+        str += 1;
     for (i = 0; i < 4; i++)
         letter[i] = str[i];
+    my_putstr(str);
     letter[i] = '\0';
     decrypt[0] = decrypt_letter(letter);
     decrypt[1] = bin_to_dec(str + 4) + 48;

@@ -1,14 +1,14 @@
-/*                                                                 
-** EPITECH PROJECT, 2019                                           
-** Navy                                                            
-** File description:                                               
-** main                                                            
+/*
+** EPITECH PROJECT, 2019
+** Navy
+** File description:
+** main
 */
 
 #include "navy.h"
 
-int enemy_pid = 0;
-char shot[9] = {0};
+int enemy_pid;
+char shot[9];
 
 void detect(int index_sig, siginfo_t *info, void *context)
 {
@@ -36,8 +36,9 @@ void syncro(int player)
     struct timespec sleep_time = {60, 0};
 
     if (player == 0) {
-        my_putstr("my_pid:   %d\nwaiting for enemy connection...\n\n");
-        my_putnbr(getpid());
+        my_putstr("my_pid:   ");
+        my_put_nbr(getpid());
+        my_putstr("\nwaiting for enemy connection...\n\n");
         if (nanosleep(&sleep_time, NULL) != 0) {
             printf("enemy connected\n");
 	    } else {

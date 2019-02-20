@@ -29,10 +29,12 @@ typedef struct player_s
 
 struct game_s
 {
-    player_t enemy;
     player_t owner;
     char *filepath;
     int win;
+    int player;
+    char shot[9];
+    int turn;
 }game_t;
 
 #endif
