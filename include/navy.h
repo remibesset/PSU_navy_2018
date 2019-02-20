@@ -51,5 +51,10 @@ int bin_to_dec(char *str);
 char *crypt_f(char *str);
 char decrypt_letter(char *letter);
 char *decrypt(char *str);
+void detect(int index_sig, siginfo_t *info, void *context);
+void emit(char *str);
+void syncro(int player);
+void init_sig(struct sigaction *info);
+void add_bin(char *str, char bin);
 
 #endif
