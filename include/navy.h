@@ -41,7 +41,7 @@ int turn_display(int my_turn);
 int change_hit_on_map(player_t *ot_player, player_t *player, hit_t pos);
 int reach_to_hit(player_t *ot_player, player_t *player, hit_t pos);
 int hit_the_enemey_map(player_t *, player_t *, char *, int);
-int verification_fictory(void);
+int verification_victory(void);
 int create_map(char *filepath, int host);
 char *format(char *binary);
 char *dec_to_bin(int nbr);

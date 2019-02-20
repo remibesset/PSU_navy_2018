@@ -7,7 +7,7 @@
 
 #include "navy.h"
 
-int verification_fictory(void)
+int verification_victory(void)
 {
     int count_player1 = 0;
     int count_player2 = 0;
