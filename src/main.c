@@ -52,15 +52,16 @@ int main(int ac, char **av)
                     my_putstr(":  hit\n\n");
                     update_enemy_map(1);
                 }
+                display_map(GAME.owner);
             } else
                 write(2, "timeout\n", 8);
-            display_map(GAME.owner);
         } else {
             my_putstr("\n\nwaiting for enemy's attack...\n");
             if (nanosleep(&sleep_time, NULL) != 0) {
                 hit_the_enemey_map(&GAME.owner, decrypt(shot));
             } else
                 write(2, "timeout\n", 8);
+            //verification_victory();
         }
         for (int i = 0; i < 9; i++)
             shot[i] = 0;
