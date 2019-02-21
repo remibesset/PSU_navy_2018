@@ -40,12 +40,16 @@ void syncro(int player)
         my_put_nbr(getpid());
         my_putstr("\nwaiting for enemy connection...\n\n");
         if (nanosleep(&sleep_time, NULL) != 0) {
-            printf("enemy connected\n");
+            my_putstr("enemy connected\n\n");
 	    } else {
             write(2, "Timeout\n", 9);
         }
-    } if (player == 1)
+    } if (player == 1) {
         kill(enemy_pid, SIGUSR1);
+        my_putstr("my_pid:   ");
+        my_put_nbr(getpid());
+        my_putstr("\nsuccessfully connected\n\n");
+    }
 }
 
 void init_sig(struct sigaction *info)

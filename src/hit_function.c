@@ -7,40 +7,42 @@
 
 #include "navy.h"
 
-// int verification_victory(void)
-// {
-//     int count_player1 = 0;
-//     int count_player2 = 0;
+int verification_victory(void)
+{
+    int count_player1 = 0;
+    int count_player2 = 0;
 
-//     for (int i = 0; i < NBR_LINE; i++)
-//         for (int j = 0; j < NBR_COL; j++) {
-//             count_player1 += (GAME.owner.my_map[i][j] >= '2' &&\
-//             GAME.owner.my_map[i][j] <= '5') ? 1 : 0;
-//             count_player2 += (GAME.enemy.my_map[i][j] >= '2' &&\
-//             GAME.enemy.my_map[i][j] <= '5') ? 1 : 0;
-//         }
-//     if (count_player1 == 0) {
-//         my_putstr("\nEnemy won\n\n");
-//         GAME.win = 1;
-//     } else if (count_player2 == 0) {
-//         my_putstr("\nI won\n\n");
-//         GAME.win = 0;
-//     }
-//     return (0);
-// }
+    for (int i = 0; i < NBR_LINE; i++)
+        for (int j = 0; j < NBR_COL; j++) {
+            count_player1 += (GAME.owner.my_map[i][j] == 'x') ? 1 : 0;
+            count_player2 += (GAME.owner.enemy_map[i][j] == 'x') ? 1 : 0;
+        }
+    if (count_player1 == 15) {
+        my_putstr("\nEnemy won\n\n");
+        GAME.win = 1;
+    } else if (count_player2 == 15) {
+        my_putstr("\nI won\n\n");
+        GAME.win = 0;
+    }
+    return (0);
+}
 
 int change_hit_on_map(player_t *player, hit_t pos)
 {
     if (pos.hit == 1) {
         player->my_map[pos.y][pos.x] = 'x';
+        my_putchar(pos.x + 'A');
+        my_putchar(pos.y + '1');
+        my_putstr(":  hit\n");
         emit("1");
         //player->enemy_map[pos.y][pos.x] = 'x';
-        my_putstr(": hit\n\n");
     } else if (pos.hit == 0) {
         player->my_map[pos.y][pos.x] = 'o';
+        my_putchar(pos.x + 'A');
+        my_putchar(pos.y + '1');
+        my_putstr(":  missed\n");
         emit("0");
         //player->enemy_map[pos.y][pos.x] = 'o';
-        my_putstr(": missed\n\n");
     }
     return (0);
 }
@@ -73,7 +75,6 @@ int hit_the_enemey_map(player_t *player, char *str)
     str[1] >= '1' && str[1] <= '8') {
         x = str[0] - 'A';
         y = str[1] - '1';
-        my_putstr(str);
         hit_pos = (hit_t) {x, y};
         reach_to_hit(player, hit_pos);
     } else {

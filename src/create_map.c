@@ -77,6 +77,8 @@ int parse_file_map(char *filepath)
 
 int create_map(char *filepath)
 {
+    for (int i = 0; i < 9; i++)
+        GAME.owner.hit_pos[i] = '\0';
     for (int i = 0; i < NBR_LINE; i++)
         for (int j = 0; j < NBR_COL; j++) {
             GAME.owner.my_map[i][j] = '.';

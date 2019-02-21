@@ -11,13 +11,20 @@ char *crypt_f(char *str)
 {
     char *crypted;
 
-    if (str[0] < 65 || str[0] > 72)
-        return (NULL);
-    else if (str[1] < 48 || str[1] >= 56 || my_strlen(str) != 2)
-        return (NULL);
-    else {
+    my_putstr("\e[0m");
+    GAME.owner.hit_pos[0] = str[0];
+    GAME.owner.hit_pos[1] = str[1];
+    str[1] -= 1;
+    if (str[0] < 65 || str[0] > 72) {
+        my_putstr("wrong position\n");
+        write(1, "attack:  ", 10);
+        crypted = crypt_f(get_next_line(0));
+    } else if (str[1] < 48 || str[1] >= 56 || my_strlen(str) != 2) {
+        my_putstr("\nwrong position\n");
+        write(1, "attack:  ", 10);
+        crypted = crypt_f(get_next_line(0));
+    } else
         crypted = my_strcat(dec_to_bin(str[1] - 48), dec_to_bin(str[0] - 65));
-    }
     free(str);
     return (crypted);
 }
@@ -41,10 +48,9 @@ char *decrypt(char *str)
         str += 1;
     for (i = 0; i < 4; i++)
         letter[i] = str[i];
-    my_putstr(str);
     letter[i] = '\0';
     decrypt[0] = decrypt_letter(letter);
-    decrypt[1] = bin_to_dec(str + 4) + 48;
+    decrypt[1] = bin_to_dec(str + 4) + 49;
     decrypt[2] = '\0';
     return (decrypt);
 }
