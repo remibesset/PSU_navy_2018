@@ -11,11 +11,14 @@ int enemy_pid = 0;
 char shot[9] = {0};
 int nbr_play = 0;
 
-int update_enemy_map(int hit) {
+int update_enemy_map(int hit)
+{
     if (hit == 1)
-        GAME.owner.enemy_map[GAME.owner.hit_pos[1] - '0' - 1][GAME.owner.hit_pos[0] - 'A'] = 'x';
+        GAME.owner.enemy_map[GAME.owner.hit_pos[1] - '0' - 1]\
+        [GAME.owner.hit_pos[0] - 'A'] = 'x';
     else
-        GAME.owner.enemy_map[GAME.owner.hit_pos[1] - '0' - 1][GAME.owner.hit_pos[0] - 'A'] = 'o';
+        GAME.owner.enemy_map[GAME.owner.hit_pos[1] - '0' - 1]\
+        [GAME.owner.hit_pos[0] - 'A'] = 'o';
     return (0);
 }
 
@@ -36,9 +39,11 @@ int main(int ac, char **av)
         syncro(0);
     }
     if (player == 1)
-        create_map(av[2]);
+        if (create_map(av[2]) == ERROR_NUM)
+            return (ERROR_NUM);
     if (player == 2)
-        create_map(av[1]);
+        if (create_map(av[1]) == ERROR_NUM)
+            return (ERROR_NUM);
     while (GAME.win == -1) {
         if (nbr_play % 2 == 0)
             display_map(GAME.owner);
@@ -75,6 +80,5 @@ int main(int ac, char **av)
             shot[i] = '\0';
         player = (player == 1) ? 2 : 1;
     }
-    return(GAME.win);
-    //return (0);
+    return (GAME.win);
 }

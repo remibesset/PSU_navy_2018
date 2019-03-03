@@ -35,14 +35,12 @@ int change_hit_on_map(player_t *player, hit_t pos)
         my_putchar(pos.y + '1');
         my_putstr(":  hit\n");
         emit("1");
-        //player->enemy_map[pos.y][pos.x] = 'x';
     } else if (pos.hit == 0) {
         player->my_map[pos.y][pos.x] = 'o';
         my_putchar(pos.x + 'A');
         my_putchar(pos.y + '1');
         my_putstr(":  missed\n");
         emit("0");
-        //player->enemy_map[pos.y][pos.x] = 'o';
     }
     return (0);
 }
@@ -60,7 +58,6 @@ int reach_to_hit(player_t *player, hit_t pos)
         change_hit_on_map(player, hit_pos);
     } else {
         my_putstr(": already hit\n ");
-        //turn_display(pos.hit);
     }
     return (0);
 }
@@ -79,7 +76,6 @@ int hit_the_enemey_map(player_t *player, char *str)
         reach_to_hit(player, hit_pos);
     } else {
         my_putstr("wrong position\n");
-        //turn_display(my_turn);
     }
     return (0);
 }

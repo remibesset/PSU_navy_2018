@@ -59,10 +59,9 @@ int parse_file_map(char *filepath)
     char *s = NULL;
     int i = 0;
 
-    if (fd > 0)
-        s = get_next_line(fd);
-    else
+    if (fd == -1)
         return (ERROR_NUM);
+    s = get_next_line(fd);
     while (s) {
         i++;
         if (line_to_parsing(s, i) == 84)

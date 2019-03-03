@@ -20,7 +20,6 @@ void detect(int index_sig, siginfo_t *info, void *context)
     }
     enemy_pid = info->si_pid;
     usleep(105);
-    //printf("shot = %s\n", shot);
 }
 
 void emit(char *str)
@@ -47,7 +46,8 @@ void syncro(int player)
 	    } else {
             write(2, "Timeout\n", 9);
         }
-    } if (player == 1) {
+    }
+    if (player == 1) {
         kill(enemy_pid, SIGUSR1);
         my_putstr("my_pid:   ");
         my_put_nbr(getpid());
