@@ -30,7 +30,7 @@
 
 void header_display_map(int my_pos)
 {
-    my_putstr((my_pos == 0) ? "my positions:\n" : "\n\nenemy’s positions:\n");
+    my_putstr((my_pos == 0) ? "\nmy positions:\n" : "\nenemy’s positions:\n");
     my_putstr(" |A B C D E F G H\n-+---------------\n");
 }
 

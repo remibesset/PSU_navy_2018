@@ -14,6 +14,7 @@ char *crypt_f(char *str)
     my_putstr("\e[0m");
     GAME.owner.hit_pos[0] = str[0];
     GAME.owner.hit_pos[1] = str[1];
+    usleep(100);
     str[1] -= 1;
     if (str[0] < 65 || str[0] > 72) {
         my_putstr("wrong position\n");

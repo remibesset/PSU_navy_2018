@@ -9,6 +9,7 @@
 
 int enemy_pid = 0;
 char shot[9] = {0};
+int nbr_play = 0;
 
 int update_enemy_map(int hit) {
     if (hit == 1)
@@ -39,34 +40,41 @@ int main(int ac, char **av)
     if (player == 2)
         create_map(av[1]);
     while (GAME.win == -1) {
-        if (player == 1) {
+        if (nbr_play % 2 == 0)
+            display_map(GAME.owner);
+        if (player == 2) {
             my_putstr("\nattack:  \e[3m");
             emit(crypt_f(get_next_line(0)));
             if (nanosleep(&sleep_time, NULL) != 0) {
                 if (shot[0] == '0') {
                     my_putstr(GAME.owner.hit_pos);
-                    my_putstr(":  missed\n\n");
+                    my_putstr(":  missed\n");
                     update_enemy_map(0);
                 } else if (shot[0] == '1') {
                     my_putstr(GAME.owner.hit_pos);
-                    my_putstr(":  hit\n\n");
+                    my_putstr(":  hit\n");
                     update_enemy_map(1);
                 }
-                display_map(GAME.owner);
-            } else
+            } else {
                 write(2, "timeout\n", 8);
+                return (84);
+            }
+            nbr_play++;
         } else {
-            my_putstr("\n\nwaiting for enemy's attack...\n");
+            my_putstr("\nwaiting for enemy's attack...\n");
             if (nanosleep(&sleep_time, NULL) != 0) {
                 hit_the_enemey_map(&GAME.owner, decrypt(shot));
-            } else
+            } else {
                 write(2, "timeout\n", 8);
-            //verification_victory();
+                return (84);
+            }
+            nbr_play++;
+            verification_victory();
         }
         for (int i = 0; i < 9; i++)
-            shot[i] = 0;
+            shot[i] = '\0';
         player = (player == 1) ? 2 : 1;
     }
     return(GAME.win);
-    return (0);
+    //return (0);
 }

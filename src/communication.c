@@ -9,15 +9,18 @@
 
 int enemy_pid;
 char shot[9];
+int nbr_sig = 0;
 
 void detect(int index_sig, siginfo_t *info, void *context)
 {
     if (index_sig == SIGUSR1) {
         add_bin(shot, '0');
-    } else if (index_sig == SIGUSR2)
+    } else if (index_sig == SIGUSR2) {
         add_bin(shot, '1');
-    usleep(100);
+    }
     enemy_pid = info->si_pid;
+    usleep(105);
+    //printf("shot = %s\n", shot);
 }
 
 void emit(char *str)
@@ -40,7 +43,7 @@ void syncro(int player)
         my_put_nbr(getpid());
         my_putstr("\nwaiting for enemy connection...\n\n");
         if (nanosleep(&sleep_time, NULL) != 0) {
-            my_putstr("enemy connected\n\n");
+            my_putstr("enemy connected\n");
 	    } else {
             write(2, "Timeout\n", 9);
         }
@@ -48,7 +51,7 @@ void syncro(int player)
         kill(enemy_pid, SIGUSR1);
         my_putstr("my_pid:   ");
         my_put_nbr(getpid());
-        my_putstr("\nsuccessfully connected\n\n");
+        my_putstr("\nsuccessfully connected\n");
     }
 }
 
