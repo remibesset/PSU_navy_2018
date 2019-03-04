@@ -85,5 +85,4 @@ int create_map(char *filepath)
         }
     if (parse_file_map(filepath) == 84)
         return (ERROR_NUM);
-    //display_map(GAME.owner);
 }

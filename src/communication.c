@@ -43,7 +43,7 @@ void syncro(int player)
         my_putstr("\nwaiting for enemy connection...\n\n");
         if (nanosleep(&sleep_time, NULL) != 0) {
             my_putstr("enemy connected\n");
-	    } else {
+        } else {
             write(2, "Timeout\n", 9);
         }
     }
