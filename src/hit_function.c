@@ -34,13 +34,13 @@ int change_hit_on_map(player_t *player, hit_t pos)
         my_putchar(pos.x + 'A');
         my_putchar(pos.y + '1');
         my_putstr(":  hit\n");
-        emit("1");
+        emit("1\0");
     } else if (pos.hit == 0) {
         player->my_map[pos.y][pos.x] = 'o';
         my_putchar(pos.x + 'A');
         my_putchar(pos.y + '1');
         my_putstr(":  missed\n");
-        emit("0");
+        emit("0\0");
     }
     return (0);
 }

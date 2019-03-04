@@ -20,6 +20,7 @@ void detect(int index_sig, siginfo_t *info, void *context)
     }
     enemy_pid = info->si_pid;
     usleep(105);
+    printf("shot = %d && shot = %s\n", my_strlen(shot), shot);
 }
 
 void emit(char *str)

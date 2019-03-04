@@ -8,7 +8,7 @@
 #include "navy.h"
 
 int enemy_pid = 0;
-char shot[9] = {0};
+char shot[9] = {'\0'};
 int nbr_play = 0;
 
 int update_enemy_map(int hit)
@@ -40,6 +40,7 @@ int init_all(int *player, char **av, int ac, struct sigaction *info)
     if (*player == 2)
         if (create_map(av[1]) == ERROR_NUM)
             return (ERROR_NUM);
+    return (0);
 }
 
 int player_hit(struct timespec sleep_time)
@@ -47,11 +48,11 @@ int player_hit(struct timespec sleep_time)
     my_putstr("\nattack:  \e[3m");
     emit(crypt_f(get_next_line(0)));
     if (nanosleep(&sleep_time, NULL) != 0) {
-        if (shot[0] == '0') {
+        if (shot[my_strlen(shot) - 1] == '0') {
             my_putstr(GAME.owner.hit_pos);
             my_putstr(":  missed\n");
             update_enemy_map(0);
-        } else if (shot[0] == '1') {
+        } else if (shot[my_strlen(shot) - 1] == '1') {
             my_putstr(GAME.owner.hit_pos);
             my_putstr(":  hit\n");
             update_enemy_map(1);
@@ -68,8 +69,10 @@ int player_recept(struct timespec sleep_time)
 {
 
     my_putstr("\nwaiting for enemy's attack...\n");
+    usleep(4000);
     if (nanosleep(&sleep_time, NULL) != 0) {
-        hit_the_enemey_map(&GAME.owner, decrypt(shot));
+        if (my_strlen(shot) == 8)
+            hit_the_enemey_map(&GAME.owner, decrypt(shot));
     } else {
         write(2, "timeout\n", 8);
         GAME.win = 84;
