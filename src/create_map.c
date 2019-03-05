@@ -46,10 +46,8 @@ int line_to_parsing(char *line, int i)
             change_map_parsing(line, line[3]);
         else
             return (ERROR_NUM);
-    } else {
-        my_puterror("Your map have a wrong format");
+    } else
         return (ERROR_NUM);
-    }
     return (0);
 }
 

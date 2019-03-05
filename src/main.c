@@ -29,17 +29,16 @@ int init_all(int *player, char **av, int ac, struct sigaction *info)
     if (ac == 3 && (av[1][0] >= '0' && av[1][0] <= '9')) {
         *player = 1;
         enemy_pid = my_getnbr(av[1]);
-        syncro(1);
-    } else {
-        *player = 2;
-        syncro(0);
-    }
-    if (*player == 1)
         if (create_map(av[2]) == ERROR_NUM)
             return (ERROR_NUM);
-    if (*player == 2)
+        syncro(1);
+    } else if (ac == 2) {
+        *player = 2;
         if (create_map(av[1]) == ERROR_NUM)
             return (ERROR_NUM);
+        syncro(0);
+    } else
+        return (ERROR_NUM);
     return (0);
 }
 
@@ -69,8 +68,8 @@ int player_recept(struct timespec sleep_time)
 {
 
     my_putstr("\nwaiting for enemy's attack...\n");
-    usleep(4000);
     if (nanosleep(&sleep_time, NULL) != 0) {
+        usleep(4000);
         if (my_strlen(shot) == 8)
             hit_the_enemey_map(&GAME.owner, decrypt(shot));
     } else {

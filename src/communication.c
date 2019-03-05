@@ -9,7 +9,6 @@
 
 int enemy_pid;
 char shot[9];
-int nbr_sig = 0;
 
 void detect(int index_sig, siginfo_t *info, void *context)
 {
