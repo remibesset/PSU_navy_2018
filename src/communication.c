@@ -7,17 +7,14 @@
 
 #include "navy.h"
 
-int enemy_pid;
-char shot[9];
-
 void detect(int index_sig, siginfo_t *info, void *context)
 {
     if (index_sig == SIGUSR1) {
-        add_bin(shot, '0');
+        add_bin(GAME.shot, '0');
     } else if (index_sig == SIGUSR2) {
-        add_bin(shot, '1');
+        add_bin(GAME.shot, '1');
     }
-    enemy_pid = info->si_pid;
+    GAME.enemy_pid = info->si_pid;
     usleep(105);
 }
 
@@ -25,9 +22,9 @@ void emit(char *str)
 {
     for (int i = 0; str[i] != '\0'; i++) {
         if (str[i] == '0')
-            kill(enemy_pid, SIGUSR1);
+            kill(GAME.enemy_pid, SIGUSR1);
         else if (str[i] == '1')
-            kill(enemy_pid, SIGUSR2);
+            kill(GAME.enemy_pid, SIGUSR2);
         usleep(100);
     }
 }
@@ -47,7 +44,7 @@ void syncro(int player)
         }
     }
     if (player == 1) {
-        kill(enemy_pid, SIGUSR1);
+        kill(GAME.enemy_pid, SIGUSR1);
         my_putstr("my_pid:   ");
         my_put_nbr(getpid());
         my_putstr("\nsuccessfully connected\n");

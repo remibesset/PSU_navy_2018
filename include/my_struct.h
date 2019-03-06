@@ -36,6 +36,8 @@ struct game_s
     int player;
     char shot[9];
     int turn;
+    int enemy_pid;
+    int nbr_play;
 }game_t;
 
 #endif

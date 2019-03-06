@@ -6,10 +6,6 @@
 */
 
 #include "navy.h"
-#include <unistd.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <stdio.h>
 
 char *put_in_save(char *save, char *buffer, int j)
 {

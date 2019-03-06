@@ -7,10 +7,6 @@
 
 #include "navy.h"
 
-int enemy_pid = 0;
-char shot[9] = {'\0'};
-int nbr_play = 0;
-
 int update_enemy_map(int hit)
 {
     if (hit == 1)
@@ -25,10 +21,13 @@ int update_enemy_map(int hit)
 int init_all(int *player, char **av, int ac, struct sigaction *info)
 {
     GAME.win = -1;
+    for (int i = 0; i < 9; GAME.shot[i] = '\0', i++);
+    GAME.nbr_play = 0;
+    GAME.enemy_pid = 0;
     init_sig(info);
     if (ac == 3 && (av[1][0] >= '0' && av[1][0] <= '9')) {
         *player = 1;
-        enemy_pid = my_getnbr(av[1]);
+        GAME.enemy_pid = my_getnbr(av[1]);
         if (create_map(av[2]) == ERROR_NUM)
             return (ERROR_NUM);
         syncro(1);
@@ -47,11 +46,11 @@ int player_hit(struct timespec sleep_time)
     my_putstr("\nattack:  \e[3m");
     emit(crypt_f(get_next_line(0)));
     if (nanosleep(&sleep_time, NULL) != 0) {
-        if (shot[my_strlen(shot) - 1] == '0') {
+        if (GAME.shot[my_strlen(GAME.shot) - 1] == '0') {
             my_putstr(GAME.owner.hit_pos);
             my_putstr(":  missed\n");
             update_enemy_map(0);
-        } else if (shot[my_strlen(shot) - 1] == '1') {
+        } else if (GAME.shot[my_strlen(GAME.shot) - 1] == '1') {
             my_putstr(GAME.owner.hit_pos);
             my_putstr(":  hit\n");
             update_enemy_map(1);
@@ -60,7 +59,7 @@ int player_hit(struct timespec sleep_time)
         write(2, "timeout\n", 8);
         GAME.win = 84;
     }
-    nbr_play++;
+    GAME.nbr_play++;
     return (0);
 }
 
@@ -70,13 +69,13 @@ int player_recept(struct timespec sleep_time)
     my_putstr("\nwaiting for enemy's attack...\n");
     if (nanosleep(&sleep_time, NULL) != 0) {
         usleep(4000);
-        if (my_strlen(shot) == 8)
-            hit_the_enemey_map(&GAME.owner, decrypt(shot));
+        if (my_strlen(GAME.shot) == 8)
+            hit_the_enemey_map(&GAME.owner, decrypt(GAME.shot));
     } else {
         write(2, "timeout\n", 8);
         GAME.win = 84;
     }
-    nbr_play++;
+    GAME.nbr_play++;
     verification_victory();
 }
 
@@ -89,14 +88,14 @@ int main(int ac, char **av)
     if (init_all(&player, av, ac, &info) == ERROR_NUM)
         return (ERROR_NUM);
     while (GAME.win == -1) {
-        if (nbr_play % 2 == 0)
+        if (GAME.nbr_play % 2 == 0)
             display_map(GAME.owner);
         if (player == 2)
             player_hit(sleep_time);
         else
             player_recept(sleep_time);
         for (int i = 0; i < 9; i++)
-            shot[i] = '\0';
+            GAME.shot[i] = '\0';
         player = (player == 1) ? 2 : 1;
     }
     return (GAME.win);

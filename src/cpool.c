@@ -5,7 +5,7 @@
 ** CPool functions
 */
 
-#include "../include/navy.h"
+#include "navy.h"
 
 char *my_strcat(char *dest, char *src)
 {
