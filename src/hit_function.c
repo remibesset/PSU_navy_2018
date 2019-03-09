@@ -57,7 +57,10 @@ int reach_to_hit(player_t *player, hit_t pos)
         hit_pos = (hit_t) {pos.x, pos.y, 0};
         change_hit_on_map(player, hit_pos);
     } else {
+        my_putchar(pos.x + 'A');
+        my_putchar(pos.y + '1');
         my_putstr(": already hit\n ");
+        emit("00");
     }
     return (0);
 }

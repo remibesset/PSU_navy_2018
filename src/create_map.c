@@ -31,8 +31,21 @@ void change_map_parsing(char *line, char cara_same)
     }
 }
 
+int verification_nomber_of_case(char *tab_of_number_boat, char *line)
+{
+    for (int j = 0; tab_of_number_boat[j] != '\0'; j++)
+        if (tab_of_number_boat[j] == line[0])
+            return (ERROR_NUM);
+    return (0);
+}
+
 int line_to_parsing(char *line, int i)
 {
+    static char tab_of_number_boat[4] = {0};
+
+    if (verification_nomber_of_case(tab_of_number_boat, line) == ERROR_NUM)
+        return (ERROR_NUM);
+    tab_of_number_boat[i - 1] = line[0];
     if (my_strlen(line) == 8 && line[0] >= '2' && line[0] <= '5' && i + '1'\
         != line[0] || (line[1] != ':' || line[4] != ':'))
         return (ERROR_NUM);
@@ -68,7 +81,7 @@ int parse_file_map(char *filepath)
         s = get_next_line(fd);
     }
     free(s);
-    if (i > 4)
+    if (i != 4)
         return (ERROR_NUM);
 }
 
