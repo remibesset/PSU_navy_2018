@@ -46,7 +46,8 @@ int player_hit(struct timespec sleep_time)
     my_putstr("\nattack:  \e[3m");
     emit(crypt_f(get_next_line(0)));
     if (nanosleep(&sleep_time, NULL) != 0) {
-        if (GAME.shot[my_strlen(GAME.shot) - 1] == '0') {
+        if (GAME.shot[my_strlen(GAME.shot) - 1] == '0' &&
+        my_strlen(GAME.shot) != 2) {
             my_putstr(GAME.owner.hit_pos);
             my_putstr(":  missed\n");
             update_enemy_map(0);
